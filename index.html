@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <title>MiziNetRegister</title>
     <img src="Contant/Mizi Net.png" height="500" width="500" class="CenterElements"/>
     <h1 class="TextCenter"> About us </h1>
 </head>
-<h3 id="AboutUsParagraph">
+<h3 id="AboutUsParagraph" >
 Welcome to Mizi Net, your exclusive web pet store club where pet lovers unite!<br>
 At Mizi Net, we offer a unique community experience for passionate pet owners like you.<br>
 By joining Mizi Net, you gain access to a vibrant online platform where you: <ul> <li> connect with fellow animal enthusiasts. </li> <li> share heartwarming stories about your furry companions. </li> <li> and discover exciting new products and services tailored to your pet's needs.</li></ul><br>
@@ -30,13 +31,15 @@ By joining Mizi Net, you gain access to a vibrant online platform where you: <ul
         inputElements = document.getElementsByName('NoneEmpty');
         passValidationElement = document.getElementById("passValidation")
         let isVal = true;
-        inputElements.forEach(function (element){
+        inputElements.forEach(function(element){
             if ( element.type === "password"){
                 if(element.value.length === 0){passValidationElement.textContent = "*Please fill password fields"; isVal = false;}
-                if(element.value.length !== 8 && element.value.length !== 0 ){passValidationElement.textContent = "*Password has to contain exact 8 characters";isVal = false;}
+                if(element.value.length < 8 && element.value.length !== 0 ){passValidationElement.textContent = "*Password has to contain at least 8 characters";isVal = false;}
             }
-            if( element.type === "email" && element.value === '')
+            if( element.type === "email" && element.value.length === 0)
                 element.style.borderColor = 'red'
+            else if( element.type === "email" )
+                element.style.borderColor = 'black'
         })
         if( inputElements[1].value !== inputElements[2].value && isVal ){passValidationElement.textContent = "*Passwords do not match";isVal = false;}
         if(isVal) {passValidationElement.textContent = ""}
@@ -56,7 +59,7 @@ By joining Mizi Net, you gain access to a vibrant online platform where you: <ul
     h1
     {
         position: relative;
-        z-index: 1;
+        z-index: 0;
         bottom: 200px;
     }
 
