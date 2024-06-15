@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiziNetRegister</title>
+    <link rel="stylesheet" href="Style.css">
+    <script type="text/javascript" src="Script.js"></script>
+</head>
+<body>
+<div class="container">
+    <img src="Contant/Mizi Net.png" height="500" width="500" class="center-elements" />
+    <h1>About us</h1>
+    <h3 id="about-us-paragraph">
+        Welcome to Mizi Net, your exclusive web pet store club where pet lovers unite!<br>
+        At Mizi Net, we offer a unique community experience for passionate pet owners like you.<br>
+        By joining Mizi Net, you gain access to a vibrant online platform where you:
+        <ul>
+            <li>connect with fellow animal enthusiasts.</li>
+            <li>share heartwarming stories about your furry companions.</li>
+            <li>discover exciting new products and services tailored to your pet's needs.</li>
+        </ul><br>
+    </h3>
+    <form class="form-container">
+        <div class="name-fields">
+            <input type="text" placeholder="First name" name="input">
+            <input type="text" placeholder="Last name" name="input">
+        </div>
+        <input type="number" placeholder="Phone number" name="input">
+        <input type="email" placeholder="Email" name="input">
+        <input type="password" placeholder="Password" name="input">
+        <input type="password" placeholder="Confirm password" name="input">
+        <div class="validation-message"></div>
+        <div class="success-message"></div>
+        <button type="button" onclick="validation()">Submit</button>
+    </form>
+</div>
+</body>
+</html>
