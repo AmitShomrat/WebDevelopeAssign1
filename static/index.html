@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiziNetRegister</title>
     <link rel="stylesheet" href="Style.css">
-    <script type="text/javascript" src="Script.js"></script>
 </head>
+
 <body>
 <div class="container">
-    <img src="Contant/Mizi Net.png" height="500" width="500" class="center-elements" />
+    <img src="Mizi Net.png" height="500" width="500" class="center-elements" />
     <h1>About us</h1>
     <h3 id="about-us-paragraph">
         Welcome to Mizi Net, your exclusive web pet store club where pet lovers unite!<br>
@@ -24,16 +24,23 @@
     <form class="form-container">
         <div class="name-fields">
             <input type="text" placeholder="First name" name="input">
+            <div class="validation-message"></div>
             <input type="text" placeholder="Last name" name="input">
+            <div class="validation-message"></div>
         </div>
         <input type="number" placeholder="Phone number" name="input">
-        <input type="email" placeholder="Email" name="input">
-        <input type="password" placeholder="Password" name="input">
-        <input type="password" placeholder="Confirm password" name="input">
         <div class="validation-message"></div>
+        <input type="email" placeholder="Email" name="input">
+        <div class="validation-message" id = "email-msg"></div>
+        <input type="password" placeholder="Password" name="input">
+        <div class="validation-message"></div>
+        <input type="password" placeholder="Confirm password" name="input">
+        <div  class="validation-message"></div>
         <div class="success-message"></div>
-        <button type="button" onclick="validation()">Submit</button>
+        <div class="server-error-message"></div>
+        <button id="button">Submit</button>
     </form>
 </div>
 </body>
+<script type="text/javascript" src="Script.js"></script>
 </html>
