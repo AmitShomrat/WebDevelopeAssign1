@@ -1,6 +1,7 @@
+//Amit Shomrat 308032218 & Ofek Caspi 208895367
 const express = require('express');
 const mongojs = require("mongojs");
-
+const bcrypt = require("bcrypt");
 // If you use the shared MongoDB server:
 const db = mongojs(
     'mongodb+srv://Student:webdev2024student@cluster0.uqyflra.mongodb.net/webdev2024',
@@ -26,6 +27,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+
 
 function ServerValidation(newUser) {
     const Regex = {
@@ -70,7 +73,7 @@ function ServerValidation(newUser) {
 }
 
 // POST request to register a new user
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     const newUser = {
         'first_name': req.body.first_name,
         'last_name': req.body.last_name,
@@ -86,7 +89,7 @@ app.post('/register', (req, res) => {
     }
 
     // Check if email already exists
-    myCollection.findOne({ email: req.body.email.toLowerCase() }, (err, doc) => {
+    myCollection.findOne({ email: req.body.email.toLowerCase() }, async (err, doc) => {
         if (err) {
             return res.status(500).end("Internal Server Error");
         }
@@ -94,12 +97,49 @@ app.post('/register', (req, res) => {
             return res.status(400).end("Email is already registered");
         }
 
-        // Email doesn't exist, proceed with insertion
+        // Email doesn't exist, proceed with insertion:
+        // Hashing with bcrypt is a server-side operation that enhances security by ensuring that plain text passwords
+        // are never stored in the database.
+        // The client side should handle the plain text password input securely and transmit it over HTTPS.
+        // The server is responsible for hashing, storing, and verifying passwords.
+        newUser.password = await bcrypt.hash(req.body.password, 10);
         myCollection.insert(newUser, (err, doc) => {
             if (err) {
-                return res.status(500).json({ error: 'Internal Server Error' });
+                return res.status(500).json({error: 'Internal Server Error'});
             }
             res.status(201).json(doc);
         });
     });
+});
+
+app.delete('/deleteUser', async (req, res) => {
+    try {
+        const doc = await myCollection.findOne({ email : req.body.email.toLowerCase() }, async (err, doc) => {
+            if (err) {
+                return res.status(500).end("Internal Server Error");
+            }
+        });
+
+        if (!doc) {
+            console.log("not found")
+            return res.status(404).end("User not found");
+        }
+
+        const isMatch = await bcrypt.compare(bcrypt.hash(req.body.password), doc.password);
+
+        if (!isMatch) {
+            return res.status(401).end("Incorrect password");
+        }
+
+        const removedUser = await myCollection.remove({ email : req.email.toLowerCase() });
+
+        if(removedUser) {
+            return res.status(200).end("User successfully deleted");
+        } else {
+            console.log("not found2")
+            return res.status(404).end( "User not found" );
+        }
+    } catch (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
 });

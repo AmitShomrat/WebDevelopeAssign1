@@ -1,3 +1,4 @@
+<!--Amit Shomrat 308032218, Ofek Caspi 208895367-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@
             <li>discover exciting new products and services tailored to your pet's needs.</li>
         </ul><br>
     </h3>
-    <form class="form-container">
+    <form class="form-container" id="RegisterForm">
         <div class="name-fields">
             <input type="text" placeholder="First name" name="input">
             <div class="validation-message"></div>
@@ -31,16 +32,24 @@
         <input type="number" placeholder="Phone number" name="input">
         <div class="validation-message"></div>
         <input type="email" placeholder="Email" name="input">
-        <div class="validation-message" id = "email-msg"></div>
+        <div class="validation-message" id="email-msg"></div>
         <input type="password" placeholder="Password" name="input">
         <div class="validation-message"></div>
         <input type="password" placeholder="Confirm password" name="input">
-        <div  class="validation-message"></div>
+        <div class="validation-message"></div>
         <div class="success-message"></div>
         <div class="server-error-message"></div>
         <button id="button">Submit</button>
     </form>
+
+    <form class="form-container" id="DeleteForm">
+        <h2>Delete User</h2>
+        <input type="email" placeholder="Email" id="RemoveUserByEmail">
+        <input type="password" placeholder="Password" id="RemoveUserByPassword">
+        <div class="delete-validation-message"></div>
+        <button id="DeleteButton">Delete</button>
+    </form>
 </div>
-</body>
 <script type="text/javascript" src="Script.js"></script>
+</body>
 </html>
